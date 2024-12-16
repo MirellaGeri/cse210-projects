@@ -33,7 +33,6 @@ public class ChecklistGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        //return $"{_shortName} - [{(IsComplete() ? "X" : " ")}] (Completed {_amountCompleted}/{_target} times)";
-        return $"{GetStringRepresentation()},{_amountCompleted}/{_target},{_bonus}";
+        return $"{_shortName} - [{(IsComplete() ? "X" : " ")}] (Completed {_amountCompleted}/{_target} times)";
     }
 }

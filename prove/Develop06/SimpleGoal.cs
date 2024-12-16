@@ -1,5 +1,4 @@
 using System;
-
 public class SimpleGoal : Goal
 {
     private bool _isComplete;
@@ -23,7 +22,6 @@ public class SimpleGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-         //return $"{_shortName} - {(IsComplete() ? "[X]" : "[ ]")}";
-         return $"{GetStringRepresentation()},{_isComplete}";
+         return $"{_shortName} - {(IsComplete() ? "[X]" : "[ ]")}";
     }
 }

@@ -25,11 +25,10 @@ public class GoalManager
             Console.WriteLine("4. Record Event for a Goal");
             Console.WriteLine("5. Save Goals");
             Console.WriteLine("6. Load Goals");
-            Console.WriteLine("7. Exit");
-            Console.Write("\nChoose an option (1-7): ");
-
+            Console.WriteLine("7. Display Total Score");
+            Console.WriteLine("8. Exit");
+            Console.Write("\nChoose an option (1-8): ");
             string choice = Console.ReadLine();
-
             switch (choice)
             {
                 case "1":
@@ -39,23 +38,26 @@ public class GoalManager
                     ListGoalNames();
                     break;
                 case "3":
-                    RecordEvent();
+                    ListGoalDetails();
                     break;
                 case "4":
-                    SaveGoals();
+                    RecordEvent();
                     break;
                 case "5":
-                    LoadGoals();
+                    SaveGoals();
                     break;
                 case "6":
-                    Console.WriteLine($"Total Score: {_score}");
+                    LoadGoals();
                     break;
                 case "7":
+                    DisplayPlayerInfo();
+                    break;
+                case "8":
                     isRunning = false;
                     Console.WriteLine("Exiting...");
                     break;
                 default:
-                    Console.WriteLine("Invalid option, please choose a valid option (1-7).");
+                    Console.WriteLine("Invalid option, please choose a valid option (1-8).");
                     break;
             }
         }
@@ -83,60 +85,40 @@ public class GoalManager
     }
     public void CreateGoal()
     {
-        Console.Clear();
+        //Console.Clear();
         Console.WriteLine("Create a new goal");
-
-        Console.Write("Goal name: ");
-        string nombre = Console.ReadLine();
-
-        Console.Write("Goal description: ");
-        string descripcion = Console.ReadLine();
-
-        Console.Write("Goal points: ");
-        int puntos;
-        while (!int.TryParse(Console.ReadLine(), out puntos) || puntos < 0)
-        {
-            Console.Write("Invalid point. Please enter a valid point: ");
-        }
-
         Console.WriteLine("\nGoal type:");
         Console.WriteLine("1. Simple");
         Console.WriteLine("2. Eternal");
         Console.WriteLine("3. Checklist");
-        string tipo = Console.ReadLine();
-
-        if (tipo == "1")
+        string type = Console.ReadLine();
+        Console.Write("Goal name: ");
+        string name = Console.ReadLine();
+        Console.Write("Goal description: ");
+        string description = Console.ReadLine();
+        Console.Write("Goal points: ");
+        int point = int.Parse(Console.ReadLine());
+        if (type == "1")
         {
-            _goals.Add(new SimpleGoal(nombre, descripcion, puntos));
+            _goals.Add(new SimpleGoal(name, description, point));
         }
-        else if (tipo == "2")
+        else if (type == "2")
         {
-            _goals.Add(new EternalGoal(nombre, descripcion, puntos));
+            _goals.Add(new EternalGoal(name, description, point));
         }
-        else if (tipo == "3")
+        else if (type == "3")
         {
             Console.Write("Enter the target number of times to complete the goal: ");
-            int objetivo;
-            while (!int.TryParse(Console.ReadLine(), out objetivo) || objetivo < 1)
-            {
-                Console.Write("Invalid target. Please enter a valid number: ");
-            }
-
+            int objetive = int.Parse(Console.ReadLine());
             Console.Write("Enter bonus points for completing the goal: ");
-            int bonificacion;
-            while (!int.TryParse(Console.ReadLine(), out bonificacion) || bonificacion < 0)
-            {
-                Console.Write("Invalid bonus. Please enter a valid number: ");
-            }
-
-            _goals.Add(new ChecklistGoal(nombre, descripcion, puntos, objetivo, bonificacion));
+            int bonus = int.Parse(Console.ReadLine());
+            _goals.Add(new ChecklistGoal(name, description, point, objetive, bonus));
         }
         else
         {
             Console.WriteLine("Invalid goal type.");
             return;
         }
-
         Console.WriteLine("\nGoal Created Successfully!");
         Console.WriteLine("\nPress Enter to continue...");
         Console.ReadLine();
