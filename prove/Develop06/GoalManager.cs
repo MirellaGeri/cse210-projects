@@ -177,11 +177,19 @@ public class GoalManager
     }
     public void PauseAndReturn()
     {
-        ShowSpinner(5); 
- 
+        ShowSpinner(5);
+        Console.Clear();
     }
     public void ShowSpinner(int seconds)
     {
-        
+        List<string> animationStrings = new List<string> { "|", "/", "-", "\\","|", "/", "-", "\\" };
+
+        foreach(string s in animationStrings)
+        {
+            Console.Write(s);
+            Thread.Sleep(500);
+            Console.Write("\b \b");
+        }
+        Console.WriteLine();
     }
 }
