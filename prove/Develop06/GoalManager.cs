@@ -67,6 +67,7 @@ public class GoalManager
         Console.WriteLine($"Total Score: {_score}");
         Console.WriteLine("Goals List:");
         ListGoalNames();
+        PauseAndReturn();
     }
     public void ListGoalNames()
     {
@@ -75,6 +76,7 @@ public class GoalManager
             string status = goal.IsComplete() ? "[X]" : "[ ]";
             Console.WriteLine($"{status} {goal._shortName} - {goal._description} - {goal._points} points");
         }
+        PauseAndReturn();
     }
     public void ListGoalDetails()
     {
@@ -82,10 +84,11 @@ public class GoalManager
         {
             Console.WriteLine(goal.GetDetailsString());
         }
+        PauseAndReturn();
     }
     public void CreateGoal()
     {
-        //Console.Clear();
+        Console.Clear();
         Console.WriteLine("Create a new goal");
         Console.WriteLine("\nGoal type:");
         Console.WriteLine("1. Simple");
@@ -165,9 +168,28 @@ public class GoalManager
             }
         }
         Console.WriteLine("Goals saved.");
+        PauseAndReturn();
     }
     public void LoadGoals()
     {
         Console.WriteLine("Goals loaded.");
+        PauseAndReturn();
+    }
+    public void PauseAndReturn()
+    {
+        ShowSpinner(5); 
+ 
+    }
+    public void ShowSpinner(int seconds)
+    {
+        List<string> animationStrings = new List<string> { "|", "/", "-", "\\","|", "/", "-", "\\" };
+
+        foreach(string s in animationStrings)
+        {
+            Console.Write(s);
+            Thread.Sleep(500);
+            Console.Write("\b \b");
+        }
+        Console.WriteLine();
     }
 }
