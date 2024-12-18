@@ -12,9 +12,9 @@ public abstract class Activity
     }
     public DateTime Date => date;
     public double DurationInMinutes => durationInMinutes;
-    public abstract double GetDistance();
-    public abstract double GetSpeed();
-    public abstract double GetPace();
+    public virtual double GetDistance() => 0;
+    public virtual double GetSpeed() => 0;
+    public virtual double GetPace() => 0; 
     public string GetSummary()
     {
         return $"{Date:dd MMM yyyy} {GetType().Name} ({DurationInMinutes} min): Distance {GetDistance():F1} miles, Speed: {GetSpeed():F1} mph, Pace: {GetPace():F2} min per mile";
